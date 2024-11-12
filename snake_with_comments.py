@@ -1,4 +1,5 @@
 #I divided it up into groups of 10ish lines so everyone can choose one to do the comments for
+#AB: Ashley Burton
 """Snake, classic arcade game.
 
 Exercises
