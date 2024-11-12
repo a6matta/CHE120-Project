@@ -1,4 +1,4 @@
-#HELLO
+#I divided it up into groups of 10ish lines so everyone can choose one to do the comments for
 """Snake, classic arcade game.
 
 Exercises
@@ -23,7 +23,7 @@ def change(x, y):
     """Change snake direction."""
     aim.x = x
     aim.y = y
-
+#------------------------------------------------------------------------------------
 
 def inside(head):
     """Return True if head inside boundaries."""
@@ -39,7 +39,7 @@ def move():
         square(head.x, head.y, 9, 'red')
         update()
         return
-
+#-----------------------------------------------------------------------------------
     snake.append(head)
 
     if head == food:
@@ -53,7 +53,7 @@ def move():
 
     for body in snake:
         square(body.x, body.y, 9, 'black')
-
+#------------------------------------------------------------------------------------
     square(food.x, food.y, 9, 'green')
     update()
     ontimer(move, 100)
