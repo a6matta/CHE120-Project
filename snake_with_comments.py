@@ -1,7 +1,7 @@
 #I divided it up into groups of 10ish lines so everyone can choose one to do the comments for
 #AB: Ashley Burton
 #AM: Alisha Matta
-
+#AH: Areeba Hasan
 
 """Snake, classic arcade game.
 
@@ -44,10 +44,13 @@ def move():
         update()
         return
 #-----------------------------------------------------------------------------------
+    #AH 
     snake.append(head)
+    #AH -> #.append attaches an element to the end of a list 
 
+    #AH -> # This section is to check if snake eats the food 
     if head == food:
-        print('Snake:', len(snake))
+        print('Snake:', len(snake)) #AH -> #Print length of snake
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
     else:
@@ -55,7 +58,10 @@ def move():
 
     clear()
 
+    #AH -> #The for loop iterates over each segment in the snake list
     for body in snake:
+    #AH -> from freegames import square above so square() from the freegames library -> 
+    #Draw square at (x, y) with side length size and fill color name. The square is oriented so the bottom left corner is at (x, y)
         square(body.x, body.y, 9, 'black')
 #------------------------------------------------------------------------------------
     square(food.x, food.y, 9, 'green')
