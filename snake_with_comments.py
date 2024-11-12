@@ -1,3 +1,4 @@
+#HELLO
 """Snake, classic arcade game.
 
 Exercises
