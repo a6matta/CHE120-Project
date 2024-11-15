@@ -47,7 +47,7 @@ def move():
     #AH 
     snake.append(head)  #AH -> #.append attaches an element to the end of a list so:
     # this adds the new head position to the end of the snake list, which grows the snake by one segment. 
-    #Since the last element of the is the head, the new position of the snake's head is added to the end, and this
+    #Since the last element of the list is the head, the new position of the snake's head is added to the end, and this
     #represents the snake moving forward (since the list reflects the snake's body from head to tail - the consistent updatng
     #of head position makes the snake appear to be moving forward as required in game play) 
     
@@ -61,10 +61,15 @@ def move():
         #AH -> The above is accomplished by assigning random x and y coordinate values to the "food" using randrange()
         #randrange(start,stop,step) generates random numbers from a specified range, the range specified will generate a random integer between -15 and 15 that will 
         #represent possible positions in terms of the game grid (the x10 is potentially to scale the grid positions to actual coordinates for the food to be placed?)
-        #the above ensures that the food will appear somwhere else on the screen for the snake to chase and the game play to continue
-    else:
-        snake.pop(0)
-
+        #The above ensures that the food will appear somwhere else on the screen for the snake to chase and the game play to continue
+    else: #AH -> If head != food, and the above condition evaluates to false indicating that the snake did not "eat" the food, the else condition is valid:
+        snake.pop(0) #AH -> .pop removes the element of a list at the specified position 
+        #AH -> Since the snake list goes from tail end to head end, the 0th index is the tail so snake.pop(0) removes the first element, or the tail, from the snake list 
+        #AH -> This ensures that the snake's length remains constant (since a new head position is always appended to makke the snake "move" forward, if food is not eaten, 
+        #the tail must be removed to ensure that the snake doesn't get longer based on the added "heads" (since in the game of snake, the snake only gets longer when food is eaten) 
+    
+#AH -> Therefore the above if statement ensures that the game play follows by growing the snake by one segment everytime food is eaten, and maintaining snake length if not 
+    #AH -> 
     clear()
 
     #AH -> #The for loop iterates over each segment in the snake list
