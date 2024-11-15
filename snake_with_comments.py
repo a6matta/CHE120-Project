@@ -2,7 +2,7 @@
 #AB: Ashley Burton
 #AM: Alisha Matta
 #AH: Areeba Hasan
-
+#GS: Gouri Sureshkumar
 """Snake, classic arcade game.
 
 Exercises
