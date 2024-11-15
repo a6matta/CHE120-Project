@@ -67,7 +67,6 @@ def move():
         #AH -> Since the snake list goes from tail end to head end, the 0th index is the tail so snake.pop(0) removes the first element, or the tail, from the snake list 
         #AH -> This ensures that the snake's length remains constant (since a new head position is always appended to makke the snake "move" forward, if food is not eaten, 
         #the tail must be removed to ensure that the snake doesn't get longer based on the added "heads" (since in the game of snake, the snake only gets longer when food is eaten) 
-    
 #AH -> Therefore the above if statement ensures that the game play follows by growing the snake by one segment everytime food is eaten, and maintaining snake length if not 
     #AH -> 
     clear()
