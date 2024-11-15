@@ -68,8 +68,8 @@ def move():
         #AH -> This ensures that the snake's length remains constant (since a new head position is always appended to makke the snake "move" forward, if food is not eaten, 
         #the tail must be removed to ensure that the snake doesn't get longer based on the added "heads" (since in the game of snake, the snake only gets longer when food is eaten) 
 #AH -> Therefore the above if statement ensures that the game play follows by growing the snake by one segment everytime food is eaten, and maintaining snake length if not 
-    #AH -> 
-    clear()
+    #AH -> clear() removes all elements from a list 
+    clear() #AH -> 
 
     #AH -> #The for loop iterates over each segment in the snake list
     for body in snake:
