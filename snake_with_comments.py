@@ -45,9 +45,12 @@ def move():
         return
 #-----------------------------------------------------------------------------------
     #AH 
-    snake.append(head)
-    #AH -> #.append attaches an element to the end of a list 
-
+    snake.append(head)  #AH -> #.append attaches an element to the end of a list so:
+    # this adds the new head position to the end of the snake list, which grows the snake by one segment. 
+    #Since the last element of the is the head, the new position of the snake's head is added to the end, and this
+    #represents the snake moving forward (since the list reflects the snake's body from head to tail - the consistent updatng
+    #of head position makes the snake appear to be moving forward as required in game play) 
+    
     #AH -> # This section is to check if snake eats the food 
     if head == food:
         print('Snake:', len(snake)) #AH -> #Print length of snake
