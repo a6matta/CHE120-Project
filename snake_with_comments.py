@@ -65,7 +65,7 @@ def move():
     else: #AH -> If head != food, and the above condition evaluates to false indicating that the snake did not "eat" the food, the else condition is valid:
         snake.pop(0) #AH -> .pop removes the element of a list at the specified position 
         #AH -> Since the snake list goes from tail end to head end, the 0th index is the tail so snake.pop(0) removes the first element, or the tail, from the snake list 
-        #AH -> This ensures that the snake's length remains constant (since a new head position is always appended to makke the snake "move" forward, if food is not eaten, 
+        #AH -> This ensures that the snake's length remains constant (since a new head position is always appended to make the snake "move" forward, if food is not eaten, 
         #the tail must be removed to ensure that the snake doesn't get longer based on the added "heads" (since in the game of snake, the snake only gets longer when food is eaten) 
 #AH -> Therefore the above if statement ensures that the game play follows by growing the snake by one segment everytime food is eaten, and maintaining snake length if not 
     #AH -> From import turtle, clear() erases the entire canvas (clears what is displayed on screen but does not reset other properties)
