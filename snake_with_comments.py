@@ -69,13 +69,13 @@ def move():
         #the tail must be removed to ensure that the snake doesn't get longer based on the added "heads" (since in the game of snake, the snake only gets longer when food is eaten) 
 #AH -> Therefore the above if statement ensures that the game play follows by growing the snake by one segment everytime food is eaten, and maintaining snake length if not 
     #AH -> clear() removes all elements from a list 
-    clear() #AH -> 
+    clear() #AH -> The clear function erases the previous game frame to update to the new one (i.e. the new snake/food positions to ensure seamless transitions)?
 
-    #AH -> #The for loop iterates over each segment in the snake list
+    #AH -> #The for loop iterates over each segment in the snake list: 
     for body in snake:
-    #AH -> from freegames import square above so square() from the freegames library -> 
-    #Draw square at (x, y) with side length size and fill color name. The square is oriented so the bottom left corner is at (x, y)
+    #AH -> from freegames import square above, so square() from the freegames library -> "Draws square at (x, y) with side length size and fill color name. The square is oriented so the bottom left corner is at (x, y)"
         square(body.x, body.y, 9, 'black')
+    #AH-> The line above 
 #------------------------------------------------------------------------------------
     square(food.x, food.y, 9, 'green')
     update()
