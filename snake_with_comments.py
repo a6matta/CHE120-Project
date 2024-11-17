@@ -1,32 +1,41 @@
-#I divided it up into groups of 10ish lines so everyone can choose one to do the comments for
 #AB: Ashley Burton
 #AM: Alisha Matta
 #AH: Areeba Hasan
 #GS: Gouri Sureshkumar
-"""Snake, classic arcade game.
-
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to mouse clicks.
-"""
 
 from random import randrange
+#AB -> The method, randrange, imported from the built-in module, random, will allow for the generation of a random number within a (start, stop) set of parameters 
+#AB -> Since randrange is the only method required from the random module, it's best to make use of the 'from' keyword so the entire module isn't imported and excessive memory isn't taken up
 from turtle import *
+#AB -> The turtle method provides the user with a "virtual canvas" as well as an onscreen pen
+#AB -> The entire turtle module contents are brought into the namespace so that the following methods can be easily called without typing "turtle.methodName": 
+#AB -> update(), clear(), ontimer(), setup(), hideturtle(), tracer(), listen(), and onkey()
+#AB -> In the context of the game, Snake, turtle is responsible for the gameplay visuals, including the food and snake itself
 
 from freegames import square, vector
+#AB -> The built-in module, freegames, is a collection of free Python games that includes a few methods like square and vector
+#AB -> The other methods included with the freegames module weren't needed so the 'from' keyword was used to minimize memory use
+#AB -> The square method draws a square from a given point, makes it a specific size, and then colours it (x, y, size, colour). In the game, it is used to create the snake and food 
+#AB -> The vector method creates a two-dimensional vector to the location (x,y). In the game, it's used to store the (x,y) coordinates of the snake, food, and direction of the snake
 
 food = vector(0, 0)
+#AB -> This assignment is to initialize the food variable as an (x,y) location kept as a vector
+#AB -> Initializing the food variable allows for the x and y coordinates to be modified separately while still being associated with the same variable
 snake = [vector(10, 0)]
+#AB -> This assignment is to initialize the snake variable as an extendable list so that it may grow, have a head, and have a direction to move
+#AB -> The snake list is initialized at the vector location (10, 0) so that it can move in any direction
+
 aim = vector(0, -10)
+#AB -> This assignment initializes the aim variable as a vector to act as a modifier of the snake's direction in the gameplay
+#AB -> It's initialized as a downward movement, but by separately modifying the x and y variables, the snake can be oriented to move left or right and up or down
 
-
-def change(x, y):
+#AB -> By calling this function, the snake's movement is being modified in the x or y direction
+def change(x, y): #AB -> The function is passed one of four arguments depending on the which direction key is pressed
     """Change snake direction."""
     aim.x = x
     aim.y = y
+    #AB -> The arguments that the function is called with will be assigned to the corresponding vector coordinates of the aim variable
+    #AB -> These variables can either be changed to 0, 10, or -10, but if one variable is not equal to zero, the other must be zero so that the snake only changes one direction at a time
 #------------------------------------------------------------------------------------
 
 def inside(head): #AM -> This function checks if the snake is within the game boundaries.
