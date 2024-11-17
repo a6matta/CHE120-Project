@@ -29,19 +29,40 @@ def change(x, y):
     aim.y = y
 #------------------------------------------------------------------------------------
 
-def inside(head):
+def inside(head): #AM -> This function checks if the snake is within the game boundaries.
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
+    #AM -> The game boundaries are from -200 to 190 on the x-axis (horizontal length of the game board) and y-axis (vertical length of the game board).
+    #AM -> This function checks if the position of the head is within the horizontal constraints and vertical constraints.
+    #AM -> The code uses the "and" operator, so it needs both conditions to be True for the function to return True.
+    #AM -> If the snake head is within the boundaries (horizontal and vertical constraints) then the function returns True which is used later in the code.
+    #AM -> Since the "and" operator is used, if one (or both) of these conditions are False, the function will return False.
+    #AM -> If the snake head is not within the horizontal or vertical boundary (or both), the function returns False which is used later in the code.
 
-
-def move():
+def move(): #AM -> This function is used to assign the head to the snake body and move the head depending on the arrow key pressed.
     """Move snake forward one segment."""
     head = snake[-1].copy()
+    #AM -> The head of the snake is assigned the front of the snake body
+    #AM -> [-1] is used to select the last object in the snake list. This is useful because the last object can be selected no matter how many times the snake list is appended (the snake body grows).
+    #AM -> Each time the snake list is updated (the body grows), the head variable is reassigned to the last object (the position of the block that was just eaten).
+    #AM -> .copy() makes a copy of the last object in the list so that it is assigned to the head variable.
     head.move(aim)
+    #AM -> When an arrow key is pressed, the "aim" vector will update.
+    #AM -> The head will move left/right/up/down depending on the player input (the arrow key pressed).
 
-    if not inside(head) or head in snake:
+    if not inside(head) or head in snake: #AM -> This "if" statement checks if the player has lost the game.
+        #AM -> The "or" operator is used, so only one condition needs to be True for the function to return True.
+        #AM -> The code uses the inside(head) function to see if the player has gone out of the game boundaries
+        #AM -> If the player has gone out of the game boundaries, inside(head) would be False. The "not" operator would switch this to True
+        #AM -> head in snake checks if the position of the snake head is the same as the position of a part of the snake body (if the snake ran into itself).
+        #AM -> If the value for "head" is part of the list for "snake", then head in snake would be True.
+        #AM -> If one of the above conditions are True, the "if" statement code will run and end the game.
         square(head.x, head.y, 9, 'red')
+        #AM -> This line of code will change the colour of the square where the snake's head is.
+        #AM -> The position of the head is found according to head.x (the horizontal position) and head.y (the vertical position). The 9 represents the size of the square (9x9)
+        #AM -> 'red' changes the colour of this 9x9 square to red.
         update()
+        #AM -> When changes are made to the game, this line displays these updates to the user. For example, when the player loses, the head will change to red and update() will make this visible in the GUI.
         return
 #-----------------------------------------------------------------------------------
     #AH 
