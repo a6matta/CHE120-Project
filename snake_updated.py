@@ -13,7 +13,8 @@ from turtle import *
 
 from freegames import square, vector
 
-food = vector(0, 0)
+food = vector(0, 0) #Needs to be edited to reflect the obstacles - need to finalize how many we want (since this is just one food at a time)
+#We also need to decide if we want the blocks to move around (maybe every few frames - they change position??) 
 
 #The snake and the snake's direction should also remain the same
 snake = [vector(10, 0)] 
@@ -38,14 +39,14 @@ def move():
 
 #________________________________________________________________________________________________________
 
-    if not inside(head) or head in snake:
+    if not inside(head) or head in snake: #The end game condition needs to changed to include "running into obstacle = faliure" as well 
         square(head.x, head.y, 9, 'red')
         update()
         return
     
     snake.append(head) #Makes the snake appear to be moving so also does not need to be changed 
 
-    if head == food:
+    if head == food: #Needs to be changed (since running into obstacle isn't the desired goal anymore) 
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
@@ -58,6 +59,7 @@ def move():
     for body in snake:
         square(body.x, body.y, 9, 'black')
 
+    #Needs to be changed to reflect obstacle position and movement 
     square(food.x, food.y, 9, 'green')
     update()
     ontimer(move, 100)
