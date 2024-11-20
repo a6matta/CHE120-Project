@@ -119,15 +119,26 @@ def move(): #AM -> This function is used to assign the head to the snake body an
     update()
     #GS -> function for when changes are made, it will be updated for the player
     ontimer(move, 100)
+    #GS -> function is used to create a loop, it will call the move function after 100 seconds so the game is updated 
 
 
 setup(420, 420, 370, 0)
+#GS -> Sets up the parameters of the game screen: 420, 420 is the width and height of the screen and 370,0 is the position of the game screen on the user's screen (370 from left and 0 from top)
 hideturtle()
+#GS -> hides the cursor on the game screen for less cluttering and distraction for user
 tracer(False)
+#GS -> disables automatic screen updates: without this function, the game can appear laggy,this function will ensure that all changes to objects(snake,food etc.) are made then the screen is updated for user as opposed to the screen being updated each time for each object
 listen()
+#GS -> enables the keyboard to be used to communicate to the game otherwise game won't respond to keys being pressed
 onkey(lambda: change(10, 0), 'Right')
+#GS ->  this function assigns the right arrow key to call the change function: 10,0 represent the horizontal and vertical movement: 10 units right and 0 movement vertically
 onkey(lambda: change(-10, 0), 'Left')
+#GS -> this function assigns the left arrow key to call the change function: -10,0 represent the horizontal and vertical movement: 10 units left and 0 movement vertically
 onkey(lambda: change(0, 10), 'Up')
+#GS ->this function assigns the up arrow key to call the change function: 0,10 represent the horizontal and vertical movement: 0 movement horizontally and 10 units up
 onkey(lambda: change(0, -10), 'Down')
+#GS ->this function assigns the down arrow key to call the change function: 0,-10 represent the horizontal and vertical movement: 0 movement horizontally and 10 units down
 move()
+#GS ->Starts the game: everything is set up and the movement of the snake can begin: without this the game wouldn't run there would be a frozen screen
 done()
+#GS ->Makes sure the game screen will stay open until user closes it on their end after the game has completed.
