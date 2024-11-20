@@ -12,8 +12,8 @@ from turtle import *
 from freegames import square, vector
 
 food = vector(0, 0) #Needs to be edited to reflect the obstacles - need to finalize how many we want (since this is just one food at a time)
-#We also need to decide if we want the blocks to move around (maybe every few frames - they change position??)
-obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)] will give us 5 randomly placed obstacles 
+#We also need to decide if we want the blocks to move around (maybe every few frames - they change position??):
+obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)] #will give us 5 randomly placed obstacles 
 
 #The snake and the snake's direction should also remain the same
 snake = [vector(10, 0)] 
@@ -38,7 +38,7 @@ def move():
 
 #________________________________________________________________________________________________________
 
-    if not inside(head) or head in snake: #The end game condition needs to changed to include "running into obstacle = faliure" as well 
+    if not inside(head) or head in snake: #The end game condition needs to changed to include "running into obstacle = faliure" as well:
     if not inside(head) or head in snake or any(head == obstacle for obstacle in obstacles):
         square(head.x, head.y, 9, 'red')
         update()
