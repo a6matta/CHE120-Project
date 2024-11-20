@@ -115,7 +115,9 @@ def move(): #AM -> This function is used to assign the head to the snake body an
     #Therefore each body segment of the snake is drawn as a black square and the food appears as a green sqaure for easy differentiation, representing both the snake, its movement, and the food's location 
 #------------------------------------------------------------------------------------
     square(food.x, food.y, 9, 'green')
+    #GS -> Draws a square with the parameters in the bracket: food.x and food.y representing the x & y coordinates of where the square should be, 9 being the size, and green the colour of the square
     update()
+    #GS -> function for when changes are made, it will be updated for the player
     ontimer(move, 100)
 
 
