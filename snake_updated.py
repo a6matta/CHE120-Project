@@ -40,6 +40,7 @@ def move():
 
     if not inside(head) or head in snake: #The end game condition needs to changed to include "running into obstacle = faliure" as well:
     if not inside(head) or head in snake or any(head == obstacle for obstacle in obstacles):
+    if not inside(head) or head in snake or head in obstacles: #AM: could the line above be simplified to this?? (not sure if this is the same thing, i still dont really understand loops)
         square(head.x, head.y, 9, 'red')
         update()
         return
