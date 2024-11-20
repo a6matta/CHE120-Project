@@ -1,11 +1,9 @@
 """Snake, classic arcade game.
+In the original game, the snake is moved across the game screen and needs to eat "food" while avoiding
+hitting itself or the edges of the game screen limits. 
 
-Exercises
-
-1. How do you make the snake faster or slower?
-2. How can you make the snake go around the edges?
-3. How would you move the food?
-4. Change the snake to respond to mouse clicks.
+In our modified version, there will be randomly placed obstacles that the snake will need to AVOID, and
+the game will end if the snake hits the obstacle, itself, or the game screen limits.
 """
 #Import Statements remain the same as the original game 
 from random import randrange
@@ -14,7 +12,8 @@ from turtle import *
 from freegames import square, vector
 
 food = vector(0, 0) #Needs to be edited to reflect the obstacles - need to finalize how many we want (since this is just one food at a time)
-#We also need to decide if we want the blocks to move around (maybe every few frames - they change position??) 
+#We also need to decide if we want the blocks to move around (maybe every few frames - they change position??)
+obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)] will give us 5 randomly placed obstacles 
 
 #The snake and the snake's direction should also remain the same
 snake = [vector(10, 0)] 
@@ -31,7 +30,7 @@ def inside(head):
     """Return True if head inside boundaries."""
     return -200 < head.x < 190 and -200 < head.y < 190
 
-#Doesn't need to be altered 
+#Doesn't need to be altered
 def move():
     """Move snake forward one segment."""
     head = snake[-1].copy()
@@ -40,12 +39,15 @@ def move():
 #________________________________________________________________________________________________________
 
     if not inside(head) or head in snake: #The end game condition needs to changed to include "running into obstacle = faliure" as well 
+    if not inside(head) or head in snake or any(head == obstacle for obstacle in obstacles):
         square(head.x, head.y, 9, 'red')
         update()
         return
     
     snake.append(head) #Makes the snake appear to be moving so also does not need to be changed 
-
+    snake.pop(0) #added here because want to remove if/else statment below 
+    
+    #CAN DELETE: 
     if head == food: #Needs to be changed (since running into obstacle isn't the desired goal anymore) 
         print('Snake:', len(snake))
         food.x = randrange(-15, 15) * 10
@@ -57,10 +59,12 @@ def move():
     clear() #Ensures smooth transitions, also stays the same 
     #Buildng of snake does not need to be altered 
     for body in snake:
-        square(body.x, body.y, 9, 'black')
+        square(body.x, body.y, 9, 'green') #I'm making the snake green, and the obstacles blue just to change it up a little
 
     #Needs to be changed to reflect obstacle position and movement 
-    square(food.x, food.y, 9, 'green')
+    for obstacle in obstacles: 
+    square(obstacle.x, obstacle.y, 9, 'blue')
+    
     update()
     ontimer(move, 100)
 
