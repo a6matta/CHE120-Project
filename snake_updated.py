@@ -5,6 +5,11 @@ hitting itself or the edges of the game screen limits.
 In our modified version, there will be randomly placed obstacles that the snake will need to AVOID, and
 the game will end if the snake hits the obstacle, itself, or the game screen limits. There will also be the addition of "bad" food, that
 will shorten the snake, along with the "good" food from the original version. 
+
+Snake = green
+Obstacles = black 
+Good food = blue 
+Bad food = yellow
 """
 from random import randrange  # Import the randrange function for generating random positions
 from turtle import *  # Import all turtle functions for graphics and animation
