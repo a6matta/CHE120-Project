@@ -10,6 +10,19 @@ Snake = green
 Obstacles = black 
 Good food = blue 
 Bad food = yellow
+
+Currently the way the game is setup, it will generate one good food and one bad food at a random position on the grid, and they will remain 
+stationary until the snake "eats" them, at which point they will relocate to a new random position and so on
+
+Three randomly positioned obstacles will also be generated and remain stationary for the duration of the game 
+
+Eating good food will grow the snake by one, eating bad food will shorten the snake by one, and colliding with itself, the obstacles, or the 
+screen boundaries will end the game 
+
+Things to consider:
+- If we want the obstacles or food to be more dynamic and move around periodically -> will need to setup a way to randomly adjust their positions 
+every few frames 
+- Also I don't think we consider the condition of the obstacles/food/snake overlapping with each other? We might want to avoid that as well
 """
 from random import randrange  # Import the randrange function for generating random positions
 from turtle import *  # Import all turtle functions for graphics and animation
