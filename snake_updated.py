@@ -91,8 +91,9 @@ def move(): # Move the snake forward
     for obstacle in obstacles:
         square(obstacle.x, obstacle.y, 9, 'black') # AH -> Draw obstacles in black 
 
-    update() 
-    ontimer(move, 100)
+    update() #Refreshes game to display changes and update to current frame
+    ontimer(move, 100) #Schedule for move function after 100 milliseconds -> creating loop for continous movement 
+    #Keep game running 
 
 def move_obstacles(): # AH -> Randomly move obstacles to new positions after certain time
     for obstacle in obstacles:
