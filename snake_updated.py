@@ -9,7 +9,7 @@ will shorten the snake, along with the "good" food from the original version.
 Snake = green
 Obstacles = black 
 Good food = blue 
-Bad food = yellow
+Bad food = orange
 
 Currently the way the game is setup, it will generate one good food and one bad food at a random position on the grid, and they will remain 
 stationary until the snake "eats" them, at which point they will relocate to a new random position and so on
@@ -31,7 +31,7 @@ from freegames import square, vector  # Import square (to draw objects) and vect
 # Initialize the food's position
 food = vector(0, 0)
 
-# Initialize the "bad food" at a random position within the grid
+# AH -> Initialize the "bad food" at a random position within the grid
 bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
 
 # Snake's initial position
@@ -40,9 +40,8 @@ snake = [vector(10, 0)]
 # Direction of movement 
 aim = vector(0, -10)
 
-# Obstacles that the snake must avoid in randomized positions (3 random obstacles)
+# AH -> Obstacles that the snake must avoid in randomized positions (5 random obstacles)
 obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
-#AM changed the range to 5 instead of 3. I think we could increase the range more to make the game harder!
 
 def change(x, y): # To change the snake's direction of movement
     aim.x = x
@@ -68,7 +67,7 @@ def move():
         food.y = randrange(-15, 15) * 10
         #AM i think here we should add something to update the obstacles location
 
-    elif head == bad_food: #If snake eats "bad" food 
+    elif head == bad_food: #AH -> If snake eats "bad" food 
         print('Ate bad food! Snake length:', len(snake))
         bad_food.x = randrange(-15, 15) * 10
         bad_food.y = randrange(-15, 15) * 10
@@ -76,7 +75,7 @@ def move():
         #AM i think here we should add something to update the obstacles location
         #AM tried using obstacles.x and obstacles.y to randomize them but it wasnt working :(
 
-        if len(snake) > 1: #Shorten the snake's length by one segment for bad food eaten 
+        if len(snake) > 1: #AH -> Shorten the snake's length by one segment for bad food eaten 
             #AM this line was not working when I tested out the game so I added a line under the bad food if statement
             snake.pop(0)
         else:
@@ -93,10 +92,10 @@ def move():
         square(body.x, body.y, 9, 'green')
 
     square(food.x, food.y, 9, 'blue') #Draw good food as blue square 
-    square(bad_food.x, bad_food.y, 9, 'orange') #Draw bad food as orange square #AM changed the colour from yellow to orange (easier to see)
+    square(bad_food.x, bad_food.y, 9, 'orange') # AH -> Draw bad food as orange square #AM changed the colour from yellow to orange (easier to see)
 
     for obstacle in obstacles:
-        square(obstacle.x, obstacle.y, 9, 'black') #Draw obstacles in black 
+        square(obstacle.x, obstacle.y, 9, 'black') # AH -> Draw obstacles in black 
 
     update()
     ontimer(move, 100)
