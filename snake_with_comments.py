@@ -119,7 +119,7 @@ def move(): #AM -> This function is used to assign the head to the snake body an
     update()
     #GS -> function for when changes are made, it will be updated for the player
     ontimer(move, 100)
-    #GS -> function is used to create a loop, it will call the move function after 100 seconds so the game is updated 
+    #GS -> function is used to create a loop, it will call the move function after 100 milliseconds so the game is updated 
 
 
 setup(420, 420, 370, 0)
