@@ -60,10 +60,12 @@ def move(): # Move the snake forward
         square(head.x, head.y, 9, 'red') # Draw the head in red to indicate Game Over
         update()
         #GS Write game over 
-        pen.up()
+        pen = Turtle()
         pen.hideturtle()
+        pen.up()
         pen.color("red")
-        pen.write("game over",align="center",font=("Arial",12,"normal"))
+        pen.goto(0,0)
+        pen.write("game over",align="center",font=("Arial",20,"bold"))
         return
 
     snake.append(head) #Add new head position to the snake to make it "move" forward 
