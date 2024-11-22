@@ -46,6 +46,11 @@ aim = vector(0, -10)
 obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
 #AM # Changed from three to five obstacles to increase difficulty 
 
+#GS -> To write messages on Game screen
+pen = Turtle()
+pen.hideturtle()
+pen.up()
+
 def change(x, y): # To change the snake's direction of movement
     aim.x = x
     aim.y = y
@@ -60,7 +65,8 @@ def restart(): # AH -> Restart the game by resetting all variables and re-callin
     snake = [vector(10, 0)]
     aim = vector(0, -10)
     obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
-    clear() #Clear the "Game Over" screen
+    pen.clear() #Clear the "Game Over" screen
+    clear() 
     move() #Recall all necessary functions to start game 
     move_obstacles()
     move_bad_food()
@@ -72,15 +78,15 @@ def move(): # Move the snake forward
     if not inside(head) or head in snake or head in obstacles: #AM # Check if the snake collides with the wall, itself, or obstacles
         square(head.x, head.y, 9, 'red') # Draw the head in red to indicate Game Over
         update()
-        #GS Write Game Over 
-        pen = Turtle()
-        pen.hideturtle()
-        pen.up()
+        pen.clear() #GS Write Game Over: 
         pen.color("red")
         pen.goto(0,0)
         pen.write("Game Over",align="center",font=("Arial",20,"bold"))
         pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
         pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) #AH -> Print final snake length 
+        pen.goto(0, -60) #Move below both messages
+        pen.color("black")  # Add a restart message
+        pen.write("Press 'r' to restart the game", align="center", font=("Arial", 12, "italic"))
         return
 
     snake.append(head) #Add new head position to the snake to make it "move" forward 
@@ -147,4 +153,4 @@ onkey(restart, 'r') #AH -> Press letter key "r" to restart game?
 move() #Start the game and the snake's movement 
 move_obstacles() #AH -> # Start obstacle movement
 move_bad_food() #AH -> Start bad food movement 
-done() #Keeps game window open until user closes it or game is completed 
+done() #Keeps game window open until user closes it or game is completed  
