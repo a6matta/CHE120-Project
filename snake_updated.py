@@ -41,7 +41,8 @@ snake = [vector(10, 0)]
 aim = vector(0, -10)
 
 # Obstacles that the snake must avoid in randomized positions (3 random obstacles)
-obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(3)]
+obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
+#AM changed the range to 5 instead of 3. I think we could increase the range more to make the game harder!
 
 def change(x, y): # To change the snake's direction of movement
     aim.x = x
@@ -54,7 +55,7 @@ def move():
     head = snake[-1].copy()
     head.move(aim)
 
-    if not inside(head) or head in snake or head in obstacles: # Check if the snake collides with the wall, itself, or obstacles
+    if not inside(head) or head in snake or head in obstacles: #AM # Check if the snake collides with the wall, itself, or obstacles
         square(head.x, head.y, 9, 'red') # Draw the head in red to indicate Game Over
         update()
         return
@@ -65,13 +66,18 @@ def move():
         print('Snake length:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
+        #AM i think here we should add something to update the obstacles location
 
     elif head == bad_food: #If snake eats "bad" food 
         print('Ate bad food! Snake length:', len(snake))
         bad_food.x = randrange(-15, 15) * 10
         bad_food.y = randrange(-15, 15) * 10
+        snake.remove(snake[-1]) #AM: The length of the snake reduces by 1 each time a bad food is eaten
+        #AM i think here we should add something to update the obstacles location
+        #AM tried using obstacles.x and obstacles.y to randomize them but it wasnt working :(
 
-        if len(snake) > 1: #Shorten the snake's length by one segment for bad food eaten
+        if len(snake) > 1: #Shorten the snake's length by one segment for bad food eaten 
+            #AM this line was not working when I tested out the game so I added a line under the bad food if statement
             snake.pop(0)
         else:
             square(head.x, head.y, 9, 'red') #If the snake only had one segment -> Game Over 
@@ -87,7 +93,7 @@ def move():
         square(body.x, body.y, 9, 'green')
 
     square(food.x, food.y, 9, 'blue') #Draw good food as blue square 
-    square(bad_food.x, bad_food.y, 9, 'yellow') #Draw bad food as yellow square
+    square(bad_food.x, bad_food.y, 9, 'orange') #Draw bad food as orange square #AM changed the colour from yellow to orange (easier to see)
 
     for obstacle in obstacles:
         square(obstacle.x, obstacle.y, 9, 'black') #Draw obstacles in black 
