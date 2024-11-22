@@ -21,9 +21,7 @@ Eating good food will grow the snake by one, eating bad food will shorten the sn
 screen boundaries will end the game 
 
 Things to consider:
-- If we want the obstacles or food to be more dynamic and move around periodically -> will need to setup a way to randomly adjust their positions 
-every few frames 
-- Also I don't think we consider the condition of the obstacles/food/snake overlapping with each other? We might want to avoid that as well
+- I don't think we consider the condition of the obstacles/food/snake overlapping with each other? We might want to avoid that as well
 """
 from random import randrange  # Import the randrange function for generating random positions
 from turtle import *  # Import all turtle functions for graphics and animation
@@ -41,7 +39,7 @@ snake = [vector(10, 0)]
 # Direction of movement 
 aim = vector(0, -10)
 
-# AH -> Obstacles that the snake must avoid in randomized positions (5 random obstacles)
+# AH -> Obstacles that the snake must avoid in randomized positions (3 random obstacles)
 obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
 #AM # Changed from three to five obstacles to increase difficulty 
 
@@ -52,7 +50,7 @@ def change(x, y): # To change the snake's direction of movement
 def inside(position): # To check if a position is within the game boundaries
     return -200 < position.x < 190 and -200 < position.y < 190
 
-def move():
+def move(): # Move the snake forward
     head = snake[-1].copy()
     head.move(aim)
 
@@ -70,7 +68,7 @@ def move():
 
     elif head == bad_food: #AH -> If snake eats "bad" food 
         print('Ate bad food! Snake length:', len(snake))
-        bad_food.x = randrange(-15, 15) * 10
+        bad_food.x = randrange(-15, 15) * 10 #Once eaten, bad food position is randomized to new spot on grid 
         bad_food.y = randrange(-15, 15) * 10
         if len(snake) > 1:  # AH -> If the snake's length is greater than one, reduce length by one segment
             snake.remove(snake[-1]) #AM # Reduce the snake's length by one segment
@@ -93,34 +91,34 @@ def move():
     for obstacle in obstacles:
         square(obstacle.x, obstacle.y, 9, 'black') # AH -> Draw obstacles in black 
 
-    update()
+    update() 
     ontimer(move, 100)
 
 def move_obstacles(): # AH -> Randomly move obstacles to new positions after certain time
     for obstacle in obstacles:
-        obstacle.x = randrange(-15, 15) * 10
+        obstacle.x = randrange(-15, 15) * 10 #AH -> Assign new random grid position for obstacles
         obstacle.y = randrange(-15, 15) * 10
     ontimer(move_obstacles, 5000)  # AH -> Schedule obstacle movement every 5 seconds
 
 
 def move_bad_food(): #AH -> Randomly move bad food to new positions after certain time 
-    bad_food.x = randrange(-15, 15) * 10
+    bad_food.x = randrange(-15, 15) * 10 #AH -> Move bad food to new random grid position 
     bad_food.y = randrange(-15, 15) * 10
     ontimer(move_bad_food, 5000)  # AH -> Schedule bad food movement every 5 seconds
 
 
 #Game setup
-setup(420, 420, 370, 0)
-hideturtle()
-tracer(False)
-listen()
-onkey(lambda: change(10, 0), 'Right')
-onkey(lambda: change(-10, 0), 'Left')
-onkey(lambda: change(0, 10), 'Up')
-onkey(lambda: change(0, -10), 'Down')
+setup(420, 420, 370, 0) #Setup game window size
+hideturtle() #Hide turtle cursor 
+tracer(False) #Disable automatic screen updates 
+listen() #Enable keyboard inputs 
+onkey(lambda: change(10, 0), 'Right') #Right arrow key changes snake direction to the right
+onkey(lambda: change(-10, 0), 'Left') #Left arrow key changes snake direction to the left
+onkey(lambda: change(0, 10), 'Up') #Up arrow key changes snake direction up
+onkey(lambda: change(0, -10), 'Down') #Down arrow key changes snake direction down
 
 #To start game:
-move()
+move() #Start the game and the snake's movement 
 move_obstacles() #AH -> # Start obstacle movement
 move_bad_food() #AH -> Start bad food movement 
-done()
+done() #Keeps game window open until user closes it or game is completed 
