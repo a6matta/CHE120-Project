@@ -85,7 +85,7 @@ def move(): # Move the snake forward
         pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
         pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) #AH -> Print final snake length 
         pen.goto(0, -60) #Move below both messages
-        pen.color("black")  # Add a restart message
+        pen.color("black")  # AH -> Add a restart message
         pen.write("Press 'r' to restart the game", align="center", font=("Arial", 12, "italic"))
         return
 
