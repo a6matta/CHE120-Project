@@ -65,7 +65,6 @@ def move():
         print('Snake length:', len(snake))
         food.x = randrange(-15, 15) * 10
         food.y = randrange(-15, 15) * 10
-        #AM i think here we should add something to update the obstacles location
 
     elif head == bad_food: #AH -> If snake eats "bad" food 
         print('Ate bad food! Snake length:', len(snake))
@@ -92,7 +91,7 @@ def move():
         square(body.x, body.y, 9, 'green')
 
     square(food.x, food.y, 9, 'blue') #Draw good food as blue square 
-    square(bad_food.x, bad_food.y, 9, 'orange') # AH -> Draw bad food as orange square #AM changed the colour from yellow to orange (easier to see)
+    square(bad_food.x, bad_food.y, 9, 'orange') # AH -> Draw bad food as yellow square #AM changed the colour from yellow to orange (easier to see)
 
     for obstacle in obstacles:
         square(obstacle.x, obstacle.y, 9, 'black') # AH -> Draw obstacles in black 
