@@ -72,20 +72,34 @@ def restart(): # AH -> Restart the game by resetting all variables and re-callin
     move_bad_food()
 
 def move(): # Move the snake forward
+     if len(snake) == 0:  # AH -> If the snake is of length 0, end the game
+        pen.clear()  # GS Write Game Over
+        pen.color("red")
+        pen.goto(0, 0)
+        pen.write("Game Over", align="center", font=("Arial", 20, "bold"))
+        pen.write("Game Over", align="center", font=("Arial", 20, "bold"))
+        pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
+        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length 
+        pen.goto(0, -60)  # Move below both messages
+        pen.color("black")  # AH -> Add a restart message
+        pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
+        update()
+        return
+         
     head = snake[-1].copy()
     head.move(aim)
 
     if not inside(head) or head in snake or head in obstacles: #AM # Check if the snake collides with the wall, itself, or obstacles
         square(head.x, head.y, 9, 'red') # Draw the head in red to indicate Game Over
         update()
-        pen.clear() #GS Write Game Over: 
+        pen.clear() 
         pen.color("red")
         pen.goto(0,0)
         pen.write("Game Over",align="center",font=("Arial",20,"bold"))
-        pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
+        pen.goto(0, -30)  
         pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) #AH -> Print final snake length 
-        pen.goto(0, -60) #Move below both messages
-        pen.color("black")  # AH -> Add a restart message
+        pen.goto(0, -60) 
+        pen.color("black")  
         pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
         return
 
@@ -102,6 +116,7 @@ def move(): # Move the snake forward
         bad_food.y = randrange(-15, 15) * 10
         if len(snake) > 1:  # AH -> If the snake's length is greater than one, reduce length by one segment
             snake.remove(snake[-1]) #AM # Reduce the snake's length by one segment
+            snake.pop(0)
         else:  # AH -> If the snake is too short (segment can't be removed), the game ends
             square(head.x, head.y, 9, 'red')  # Draw head in red to indicate Game Over
             update()
