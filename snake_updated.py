@@ -63,7 +63,7 @@ def move(): # Move the snake forward
         pen.up()
         pen.hideturtle()
         pen.color("red")
-        pen.write("game over",align="center",font("Arial",12,"normal"))
+        pen.write("game over",align="center",font=("Arial",12,"normal"))
         return
 
     snake.append(head) #Add new head position to the snake to make it "move" forward 
