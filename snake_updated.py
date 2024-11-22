@@ -147,7 +147,7 @@ onkey(lambda: change(10, 0), 'Right') #Right arrow key changes snake direction t
 onkey(lambda: change(-10, 0), 'Left') #Left arrow key changes snake direction to the left
 onkey(lambda: change(0, 10), 'Up') #Up arrow key changes snake direction up
 onkey(lambda: change(0, -10), 'Down') #Down arrow key changes snake direction down
-onkey(restart, 'r') #AH -> Press letter key "r" to restart game?
+onkey(restart, 'r') #AH -> Press letter key "r" to restart game
 
 #To start game:
 move() #Start the game and the snake's movement 
