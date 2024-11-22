@@ -67,6 +67,8 @@ def move(): # Move the snake forward
         pen.color("red")
         pen.goto(0,0)
         pen.write("Game Over",align="center",font=("Arial",20,"bold"))
+        pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
+        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) #AH -> Print final snake length 
         return
 
     snake.append(head) #Add new head position to the snake to make it "move" forward 
