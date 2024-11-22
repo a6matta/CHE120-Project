@@ -17,7 +17,7 @@ to a new random position and so on
 
 Five randomly positioned obstacles will also be generated and are programmed to move every five seconds with ontimer()
 
-Eating good food will grow the snake by one, eating bad food will shorten the snake by one, and colliding with itself, the obstacles, or the 
+Eating good food will grow the snake by one, eating bad food will shorten the snake by one (NOT WORKING), and colliding with itself, the obstacles, or the 
 screen boundaries will end the game 
 
 Things to consider:
