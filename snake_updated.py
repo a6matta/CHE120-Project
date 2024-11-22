@@ -11,10 +11,11 @@ Obstacles = black
 Good food = blue 
 Bad food = orange
 
-Currently the way the game is setup, it will generate one good food and one bad food at a random position on the grid, and they will remain 
-stationary until the snake "eats" them, at which point they will relocate to a new random position and so on
+Currently the way the game is setup, it will generate one good food and one bad food at a random position on the grid, and the good food 
+will remain stationary until the snake "eats" it, while the bad food is programmed to move every five seconds, at which point they will relocate 
+to a new random position and so on
 
-Three randomly positioned obstacles will also be generated and remain stationary for the duration of the game 
+Five randomly positioned obstacles will also be generated and are programmed to move every five seconds with ontimer()
 
 Eating good food will grow the snake by one, eating bad food will shorten the snake by one, and colliding with itself, the obstacles, or the 
 screen boundaries will end the game 
@@ -42,6 +43,7 @@ aim = vector(0, -10)
 
 # AH -> Obstacles that the snake must avoid in randomized positions (5 random obstacles)
 obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
+#AM # Changed from three to five obstacles to increase difficulty 
 
 def change(x, y): # To change the snake's direction of movement
     aim.x = x
@@ -61,27 +63,21 @@ def move():
 
     snake.append(head) #Add new head position to the snake to make it "move" forward 
 
-    if head == food:
+    if head == food: #If snake eats good food, grows one segment 
         print('Snake length:', len(snake))
-        food.x = randrange(-15, 15) * 10
+        food.x = randrange(-15, 15) * 10 #Once eaten, food position is randomized to new spot on grid 
         food.y = randrange(-15, 15) * 10
 
     elif head == bad_food: #AH -> If snake eats "bad" food 
         print('Ate bad food! Snake length:', len(snake))
         bad_food.x = randrange(-15, 15) * 10
         bad_food.y = randrange(-15, 15) * 10
-        snake.remove(snake[-1]) #AM: The length of the snake reduces by 1 each time a bad food is eaten
-        #AM i think here we should add something to update the obstacles location
-        #AM tried using obstacles.x and obstacles.y to randomize them but it wasnt working :(
-
-        if len(snake) > 1: #AH -> Shorten the snake's length by one segment for bad food eaten 
-            #AM this line was not working when I tested out the game so I added a line under the bad food if statement
-            snake.pop(0)
-        else:
-            square(head.x, head.y, 9, 'red') #If the snake only had one segment -> Game Over 
+        if len(snake) > 1:  # AH -> If the snake's length is greater than one, reduce length by one segment
+            snake.remove(snake[-1]) #AM # Reduce the snake's length by one segment
+        else:  # AH -> If the snake is too short (segment can't be removed), the game ends
+            square(head.x, head.y, 9, 'red')  # Draw head in red to indicate Game Over
             update()
             return
-
     else:
         snake.pop(0) #Remove the tail to maintain constant length (if no food eaten)
 
@@ -91,7 +87,8 @@ def move():
         square(body.x, body.y, 9, 'green')
 
     square(food.x, food.y, 9, 'blue') #Draw good food as blue square 
-    square(bad_food.x, bad_food.y, 9, 'orange') # AH -> Draw bad food as yellow square #AM changed the colour from yellow to orange (easier to see)
+    square(bad_food.x, bad_food.y, 9, 'orange') # AH -> Draw bad food as yellow square 
+    #AM changed the colour from yellow to orange (easier to see)
 
     for obstacle in obstacles:
         square(obstacle.x, obstacle.y, 9, 'black') # AH -> Draw obstacles in black 
@@ -99,7 +96,20 @@ def move():
     update()
     ontimer(move, 100)
 
-#Setup stays the same 
+def move_obstacles(): # AH -> Randomly move obstacles to new positions after certain time
+    for obstacle in obstacles:
+        obstacle.x = randrange(-15, 15) * 10
+        obstacle.y = randrange(-15, 15) * 10
+    ontimer(move_obstacles, 5000)  # AH -> Schedule obstacle movement every 5 seconds
+
+
+def move_bad_food(): #AH -> Randomly move bad food to new positions after certain time 
+    bad_food.x = randrange(-15, 15) * 10
+    bad_food.y = randrange(-15, 15) * 10
+    ontimer(move_bad_food, 5000)  # AH -> Schedule bad food movement every 5 seconds
+
+
+#Game setup
 setup(420, 420, 370, 0)
 hideturtle()
 tracer(False)
@@ -108,5 +118,9 @@ onkey(lambda: change(10, 0), 'Right')
 onkey(lambda: change(-10, 0), 'Left')
 onkey(lambda: change(0, 10), 'Up')
 onkey(lambda: change(0, -10), 'Down')
+
+#To start game:
 move()
+move_obstacles() #AH -> # Start obstacle movement
+move_bad_food() #AH -> Start bad food movement 
 done()
