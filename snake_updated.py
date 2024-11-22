@@ -22,9 +22,7 @@ screen boundaries will end the game
 
 Things to consider:
 - I don't think we consider the condition of the obstacles/food/snake overlapping with each other? We might want to avoid that as well
-- Also AM suggested we could increase the range more to make the game harder. I don't know if that will be necessary but we could 
-always have it as an option to up the difficulty if needed. 
--  can add an option to choose difficulty. ask the player for input, then change the range (# of objects)
+- Possibly for an option to choose difficulty. ask the player for input to change # of obstacles + speed at which they change 
 """
 from random import randrange  # Import the randrange function for generating random positions
 from turtle import *  # Import all turtle functions for graphics and animation
