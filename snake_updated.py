@@ -17,7 +17,7 @@ to a new random position and so on
 
 Five randomly positioned obstacles will also be generated and are programmed to move every five seconds with ontimer()
 
-Eating good food will grow the snake by one, eating bad food will shorten the snake by one (NOT WORKING), and colliding with itself, the obstacles, or the 
+Eating good food will grow the snake by one, eating bad food will shorten the snake by one, and colliding with itself, the obstacles, or the 
 screen boundaries will end the game 
 
 Things to consider:
@@ -42,130 +42,126 @@ snake = [vector(10, 0)]
 # Direction of movement 
 aim = vector(0, -10)
 
-# AH -> Obstacles that the snake must avoid in randomized positions (3 random obstacles)
+# AH -> Obstacles that the snake must avoid in randomized positions (5 random obstacles)
 obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
-#AM # Changed from three to five obstacles to increase difficulty 
 
-#GS -> To write messages on Game screen
+# GS -> To write messages on Game screen
 pen = Turtle()
 pen.hideturtle()
 pen.up()
 
-def change(x, y): # To change the snake's direction of movement
+def change(x, y):  # To change the snake's direction of movement
     aim.x = x
     aim.y = y
 
-def inside(position): # To check if a position is within the game boundaries
+def inside(position):  # To check if a position is within the game boundaries
     return -200 < position.x < 190 and -200 < position.y < 190
 
-def restart(): # AH -> Restart the game by resetting all variables and re-calling all functions 
+def restart():  # AH -> Restart the game by resetting all variables and re-calling all functions
     global food, bad_food, snake, aim, obstacles
-    food = vector(0, 0) #Re-initilaize all variables
+    food = vector(0, 0)  # Re-initialize all variables
     bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
     snake = [vector(10, 0)]
     aim = vector(0, -10)
     obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
-    pen.clear() #Clear the "Game Over" screen
+    pen.clear()  # Clear the "Game Over" screen
     clear() 
-    move() #Recall all necessary functions to start game 
+    move()  # Recall all necessary functions to start the game 
     move_obstacles()
     move_bad_food()
 
-def move(): # Move the snake forward
-     if len(snake) == 0:  # AH -> If the snake is of length 0, end the game
+def move():  # Move the snake forward
+    if len(snake) == 0:  # AH -> If the snake is of length 0, end the game
         pen.clear()  # GS Write Game Over
         pen.color("red")
         pen.goto(0, 0)
         pen.write("Game Over", align="center", font=("Arial", 20, "bold"))
-        pen.write("Game Over", align="center", font=("Arial", 20, "bold"))
         pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
-        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length 
+        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length
         pen.goto(0, -60)  # Move below both messages
         pen.color("black")  # AH -> Add a restart message
         pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
         update()
         return
-         
+
     head = snake[-1].copy()
     head.move(aim)
 
-    if not inside(head) or head in snake or head in obstacles: #AM # Check if the snake collides with the wall, itself, or obstacles
-        square(head.x, head.y, 9, 'red') # Draw the head in red to indicate Game Over
+    if not inside(head) or head in snake or head in obstacles:  # AM # Check if the snake collides with the wall, itself, or obstacles
+        square(head.x, head.y, 9, 'red')  # Draw the head in red to indicate Game Over
         update()
         pen.clear() 
         pen.color("red")
-        pen.goto(0,0)
-        pen.write("Game Over",align="center",font=("Arial",20,"bold"))
+        pen.goto(0, 0)
+        pen.write("Game Over", align="center", font=("Arial", 20, "bold"))
         pen.goto(0, -30)  
-        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) #AH -> Print final snake length 
+        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length 
         pen.goto(0, -60) 
         pen.color("black")  
         pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
         return
 
-    snake.append(head) #Add new head position to the snake to make it "move" forward 
+    snake.append(head)  # Add new head position to the snake to make it "move" forward 
 
-    if head == food: #If snake eats good food, grows one segment 
+    if head == food:  # If snake eats good food, grows one segment
         print('Ate good food! Snake length:', len(snake))
-        food.x = randrange(-15, 15) * 10 #Once eaten, food position is randomized to new spot on grid 
+        food.x = randrange(-15, 15) * 10  # Once eaten, food position is randomized to new spot on grid 
         food.y = randrange(-15, 15) * 10
 
-    elif head == bad_food: #AH -> If snake eats "bad" food 
-        print('Ate bad food! Snake length:', len(snake))
-        bad_food.x = randrange(-15, 15) * 10 #Once eaten, bad food position is randomized to new spot on grid 
+    elif head == bad_food:  # AH -> If snake eats "bad" food
+        bad_food.x = randrange(-15, 15) * 10  # Once eaten, bad food position is randomized to new spot on grid 
         bad_food.y = randrange(-15, 15) * 10
         if len(snake) > 1:  # AH -> If the snake's length is greater than one, reduce length by one segment
-            snake.remove(snake[-1]) #AM # Reduce the snake's length by one segment
+            snake.remove(snake[-1])  # AM # Reduce the snake's length by one segment
             snake.pop(0)
+            print('Ate bad food! Snake length:', len(snake))
         else:  # AH -> If the snake is too short (segment can't be removed), the game ends
             square(head.x, head.y, 9, 'red')  # Draw head in red to indicate Game Over
             update()
             return
     else:
-        snake.pop(0) #Remove the tail to maintain constant length (if no food eaten)
+        snake.pop(0)  # Remove the tail to maintain constant length (if no food eaten)
 
-    clear() #Clear the screen to erase the previous frame -> ensures smooth transitioning between frames
+    clear()  # Clear the screen to erase the previous frame -> ensures smooth transitioning between frames
 
-    for body in snake: #Draw the snake
+    for body in snake:  # Draw the snake
         square(body.x, body.y, 9, 'green')
 
-    square(food.x, food.y, 9, 'blue') #Draw good food as blue square 
-    square(bad_food.x, bad_food.y, 9, 'orange') # AH -> Draw bad food as yellow square 
-    #AM changed the colour from yellow to orange (easier to see)
+    square(food.x, food.y, 9, 'blue')  # Draw good food as blue square 
+    square(bad_food.x, bad_food.y, 9, 'orange')  # AH -> Draw bad food as orange square
+    # AM changed the colour from yellow to orange (easier to see)
 
     for obstacle in obstacles:
-        square(obstacle.x, obstacle.y, 9, 'black') # AH -> Draw obstacles in black 
+        square(obstacle.x, obstacle.y, 9, 'black')  # AH -> Draw obstacles in black
 
-    update() #Refreshes game to display changes and update to current frame
-    ontimer(move, 100) #Schedule for move function after 100 milliseconds -> creating loop for continous movement 
-    #Keep game running 
+    update()  # Refreshes game to display changes and update to current frame
+    ontimer(move, 100)  # Schedule for move function after 100 milliseconds -> creating loop for continuous movement
+    # Keep game running
 
-def move_obstacles(): # AH -> Randomly move obstacles to new positions after certain time
+def move_obstacles():  # AH -> Randomly move obstacles to new positions after certain time
     for obstacle in obstacles:
-        obstacle.x = randrange(-15, 15) * 10 #AH -> Assign new random grid position for obstacles
+        obstacle.x = randrange(-15, 15) * 10  # AH -> Assign new random grid position for obstacles
         obstacle.y = randrange(-15, 15) * 10
     ontimer(move_obstacles, 5000)  # AH -> Schedule obstacle movement every 5 seconds
 
-
-def move_bad_food(): #AH -> Randomly move bad food to new positions after certain time 
-    bad_food.x = randrange(-15, 15) * 10 #AH -> Move bad food to new random grid position 
+def move_bad_food():  # AH -> Randomly move bad food to new positions after certain time
+    bad_food.x = randrange(-15, 15) * 10  # AH -> Move bad food to new random grid position
     bad_food.y = randrange(-15, 15) * 10
     ontimer(move_bad_food, 5000)  # AH -> Schedule bad food movement every 5 seconds
 
+# Game setup
+setup(420, 420, 370, 0)  # Setup game window size
+hideturtle()  # Hide turtle cursor 
+tracer(False)  # Disable automatic screen updates 
+listen()  # Enable keyboard inputs 
+onkey(lambda: change(10, 0), 'Right')  # Right arrow key changes snake direction to the right
+onkey(lambda: change(-10, 0), 'Left')  # Left arrow key changes snake direction to the left
+onkey(lambda: change(0, 10), 'Up')  # Up arrow key changes snake direction up
+onkey(lambda: change(0, -10), 'Down')  # Down arrow key changes snake direction down
+onkey(restart, 'r')  # AH -> Press letter key "r" to restart game
 
-#Game setup
-setup(420, 420, 370, 0) #Setup game window size
-hideturtle() #Hide turtle cursor 
-tracer(False) #Disable automatic screen updates 
-listen() #Enable keyboard inputs 
-onkey(lambda: change(10, 0), 'Right') #Right arrow key changes snake direction to the right
-onkey(lambda: change(-10, 0), 'Left') #Left arrow key changes snake direction to the left
-onkey(lambda: change(0, 10), 'Up') #Up arrow key changes snake direction up
-onkey(lambda: change(0, -10), 'Down') #Down arrow key changes snake direction down
-onkey(restart, 'r') #AH -> Press letter key "r" to restart game
-
-#To start game:
-move() #Start the game and the snake's movement 
-move_obstacles() #AH -> # Start obstacle movement
-move_bad_food() #AH -> Start bad food movement 
-done() #Keeps game window open until user closes it or game is completed  
+# To start game:
+move()  # Start the game and the snake's movement
+move_obstacles()  # AH -> Start obstacle movement
+move_bad_food()  # AH -> Start bad food movement 
+done()  # Keeps game window open until user closes it or game is completed
