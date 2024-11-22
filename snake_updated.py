@@ -59,6 +59,11 @@ def move(): # Move the snake forward
     if not inside(head) or head in snake or head in obstacles: #AM # Check if the snake collides with the wall, itself, or obstacles
         square(head.x, head.y, 9, 'red') # Draw the head in red to indicate Game Over
         update()
+        #GS Write game over 
+        pen.up()
+        pen.hideturtle()
+        pen.color("red")
+        pen.write("game over",align="center",font("Arial",12,"normal"))
         return
 
     snake.append(head) #Add new head position to the snake to make it "move" forward 
