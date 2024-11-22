@@ -53,6 +53,18 @@ def change(x, y): # To change the snake's direction of movement
 def inside(position): # To check if a position is within the game boundaries
     return -200 < position.x < 190 and -200 < position.y < 190
 
+def restart(): # AH -> Restart the game by resetting all variables and re-calling all functions 
+    global food, bad_food, snake, aim, obstacles
+    food = vector(0, 0) #Re-initilaize all variables
+    bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+    snake = [vector(10, 0)]
+    aim = vector(0, -10)
+    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
+    clear() #Clear the "Game Over" screen
+    move() #Recall all necessary functions to start game 
+    move_obstacles()
+    move_bad_food()
+
 def move(): # Move the snake forward
     head = snake[-1].copy()
     head.move(aim)
@@ -129,6 +141,7 @@ onkey(lambda: change(10, 0), 'Right') #Right arrow key changes snake direction t
 onkey(lambda: change(-10, 0), 'Left') #Left arrow key changes snake direction to the left
 onkey(lambda: change(0, 10), 'Up') #Up arrow key changes snake direction up
 onkey(lambda: change(0, -10), 'Down') #Down arrow key changes snake direction down
+onkey(restart, 'r') #AH -> Press letter key "r" to restart game?
 
 #To start game:
 move() #Start the game and the snake's movement 
