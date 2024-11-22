@@ -92,10 +92,10 @@ def move():  # Move the snake forward
         update()
         pen.clear() 
         pen.color("red")
-        pen.goto(0, 0)
-        pen.write("Game Over", align="center", font=("Arial", 20, "bold"))
+        pen.goto(0, 0) 
+        pen.write("Game Over", align="center", font=("Arial", 20, "bold")) #Write Game Over
         pen.goto(0, -30)  
-        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length 
+        pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) 
         pen.goto(0, -60) 
         pen.color("black")  
         pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
