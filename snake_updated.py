@@ -200,7 +200,7 @@ def move():  # Move the snake forward
     snake.append(head)  # Add new head position to the snake to make it "move" forward 
 
     if head == food:  # If snake eats good food, grows one segment
-        print('Ate good food! Snake length:', len(snake))
+        print('Ate good food! Snake length:', len(snake)) #Print snake length if good food eaten 
         food.x = randrange(-15, 15) * 10  # Once eaten, food position is randomized to new spot on grid 
         food.y = randrange(-15, 15) * 10
 
@@ -210,7 +210,7 @@ def move():  # Move the snake forward
         if len(snake) > 1:  # AH -> If the snake's length is greater than one, reduce length by one segment
             snake.remove(snake[-1])  # AM # Reduce the snake's length by one segment
             snake.pop(0) #AH -> To ensure snake shrinks 
-            print('Ate bad food! Snake length:', len(snake))
+            print('Ate bad food! Snake length:', len(snake)) #AH -> Print snake length if bad food eaten 
         else:  # AH -> If the snake is too short (segment can't be removed), the game ends
             square(head.x, head.y, 9, 'red')  # Draw head in red to indicate Game Over
             update()
