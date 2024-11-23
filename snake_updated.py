@@ -20,9 +20,15 @@ Five randomly positioned obstacles will also be generated and are programmed to 
 Eating good food will grow the snake by one, eating bad food will shorten the snake by one, and colliding with itself, the obstacles, or the 
 screen boundaries will end the game 
 
-Things to consider:
-- I don't think we consider the condition of the obstacles/food/snake overlapping with each other? We might want to avoid that as well
-- Possibly for an option to choose difficulty. ask the player for input to change # of obstacles + speed at which they change 
+Added Features:
+- Gameplay border
+- GAME OVER screen and printed final snake length
+- Replay option with different levels of difficulty (different # of obstacles)
+- Game Instructions
+
+Further Potential Improvements: 
+- Avoid good food/bad food/obstacle overlapping condition 
+- Allow user to adjust time for bad food/obstacle movement 
 """
 from random import randrange  # Import the randrange function for generating random positions
 from turtle import *  # Import all turtle functions for graphics and animation
@@ -203,7 +209,7 @@ def move():  # Move the snake forward
         bad_food.y = randrange(-15, 15) * 10
         if len(snake) > 1:  # AH -> If the snake's length is greater than one, reduce length by one segment
             snake.remove(snake[-1])  # AM # Reduce the snake's length by one segment
-            snake.pop(0)
+            snake.pop(0) #AH -> To ensure snake shrinks 
             print('Ate bad food! Snake length:', len(snake))
         else:  # AH -> If the snake is too short (segment can't be removed), the game ends
             square(head.x, head.y, 9, 'red')  # Draw head in red to indicate Game Over
@@ -259,7 +265,7 @@ onkey(lambda: change(10, 0), 'Right')  # Right arrow key changes snake direction
 onkey(lambda: change(-10, 0), 'Left')  # Left arrow key changes snake direction to the left
 onkey(lambda: change(0, 10), 'Up')  # Up arrow key changes snake direction up
 onkey(lambda: change(0, -10), 'Down')  # Down arrow key changes snake direction down
-onkey(restart_easy, 'e')  # AH -> Press letter key to restart game
+onkey(restart_easy, 'e')  # AH -> Press letter keys to restart game
 onkey(restart_med, 'm')  #AM -> Press the letter key associated with each difficulty
 onkey(restart_hard, 'h')
 onkey(game_instructions, 'i') #AM -> Press the letter key "i" to see game instructions
