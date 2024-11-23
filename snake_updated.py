@@ -158,8 +158,8 @@ def move():  # Move the snake forward
         pen.goto(0, -30)  # AH -> Move pen below the "Game Over" message
         pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length
         pen.goto(0, -60)  # Move below both messages
-        pen.color("black")  # AH -> Add a restart message
-        pen.write("To restart game:", align="center", font=("Arial", 12, "italic"))
+        pen.color("black") 
+        pen.write("To restart game:", align="center", font=("Arial", 12, "italic")) # AH -> Add a restart message
         pen.goto(0, -80) #AM -> when the game ends, allow the player to play again and select their difficulty.
         pen.write("Press 'E' for easy difficulty", align="center", font=("Arial", 10, "italic"))
         pen.goto(0, -100) 
