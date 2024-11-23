@@ -147,8 +147,19 @@ def move_bad_food():  # AH -> Randomly move bad food to new positions after cert
     bad_food.y = randrange(-15, 15) * 10
     ontimer(move_bad_food, 5000)  # AH -> Schedule bad food movement every 5 seconds
 
+def window_border():#AB -> outlines the playable area of the game window
+    my_pen = Turtle()
+    my_pen.penup()
+    my_pen.setposition(-200,200)
+    my_pen.pendown()
+    for top in range(4):
+        my_pen.forward(400)
+        my_pen.right(90)
+    my_pen.hideturtle()
+    
 # Game setup
 setup(420, 420, 370, 0)  # Setup game window size
+window_border()    # Creating a border for the playable area
 hideturtle()  # Hide turtle cursor 
 tracer(False)  # Disable automatic screen updates 
 listen()  # Enable keyboard inputs 
