@@ -55,18 +55,93 @@ def change(x, y):  # To change the snake's direction of movement
 def inside(position):  # To check if a position is within the game boundaries
     return -200 < position.x < 190 and -200 < position.y < 190
 
-def restart():  # AH -> Restart the game by resetting all variables and re-calling all functions
+#def restart():  # AH -> Restart the game by resetting all variables and re-calling all functions
+#    global food, bad_food, snake, aim, obstacles
+#    food = vector(0, 0)  # Re-initialize all variables
+#    bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+#    snake = [vector(10, 0)]
+#    aim = vector(0, -10)
+#    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
+#    pen.clear()  # Clear the "Game Over" screen
+#    clear() 
+#    move()  # Recall all necessary functions to start the game 
+#    move_obstacles()
+#    move_bad_food()
+
+#AM -> Restart the game to easy difficulty. THe number of obstacles is reset to 3
+def restart_easy():  # AH -> Restart the game by resetting all variables and re-calling all functions
     global food, bad_food, snake, aim, obstacles
     food = vector(0, 0)  # Re-initialize all variables
     bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
     snake = [vector(10, 0)]
     aim = vector(0, -10)
-    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
+    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(3)]
     pen.clear()  # Clear the "Game Over" screen
     clear() 
     move()  # Recall all necessary functions to start the game 
     move_obstacles()
     move_bad_food()
+
+#AM -> Restart the game to medium difficulty. The number of obstacles is reset to 6.
+def restart_med():  
+    global food, bad_food, snake, aim, obstacles
+    food = vector(0, 0)
+    bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+    snake = [vector(10, 0)]
+    aim = vector(0, -10)
+    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(6)]
+    pen.clear() 
+    clear() 
+    move()
+    move_obstacles()
+    move_bad_food()
+
+#AM -> Restart the game to hard difficulty. The number of obstacles is reset to 9.
+def restart_hard():  
+    global food, bad_food, snake, aim, obstacles
+    food = vector(0, 0) 
+    bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
+    snake = [vector(10, 0)]
+    aim = vector(0, -10)
+    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(9)]
+    pen.clear() 
+    clear() 
+    move()
+    move_obstacles()
+    move_bad_food()
+
+#AM -> Print out the game instructions.
+def game_instructions():
+    pen.clear()
+    clear()
+    pen.goto(0, 100) 
+    pen.color("black")  
+    pen.write("Game Instructions:", align="center", font=("Arial", 14, "italic")) #AM -> displays the game instructions and controls.
+    pen.goto(0, 75)  
+    pen.write("Use the arrow keys to move your snake. Grow your snake to gain points. Don't hit the walls or obstacles!", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0, 50) 
+    pen.color("green")  #AM -> display what each coloured block represents
+    pen.write("green --> your snake", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0, 25) 
+    pen.color("blue")  
+    pen.write("blue --> good food that makes your snake grow!", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0, 0) 
+    pen.color("orange")  
+    pen.write("orange --> bad food that makes your snake shrink!", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0, -25) 
+    pen.color("black")  
+    pen.write("black --> hitting an obstacle makes you lose the game!", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0, -50) #AM -> allows the player to play again and select their difficulty
+    pen.write("To play again:", align="center", font=("Arial", 12, "italic")) 
+    pen.goto(0, -70) 
+    pen.write("Press 'E' for easy difficulty", align="center", font=("Arial", 10, "italic"))
+    pen.goto(0, -90) 
+    pen.write("Press 'M' for medium difficulty", align="center", font=("Arial", 10, "italic"))
+    pen.goto(0, -110) 
+    pen.write("Press 'H' for hard difficulty", align="center", font=("Arial", 10, "italic"))
+    pen.goto(0, -130)
+    pen.write("Press 'I' for game instructions", align="center", font=("Arial", 10, "italic"))
+
 
 def move():  # Move the snake forward
     if len(snake) == 0:  # AH -> If the snake is of length 0, end the game
@@ -78,6 +153,15 @@ def move():  # Move the snake forward
         pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal"))  # AH -> Print final snake length
         pen.goto(0, -60)  # Move below both messages
         pen.color("black")  # AH -> Add a restart message
+        pen.write("To restart game:", align="center", font=("Arial", 12, "italic"))
+        pen.goto(0, -80) #AM -> when the game ends, allow the player to play again and select their difficulty.
+        pen.write("Press 'E' for easy difficulty", align="center", font=("Arial", 10, "italic"))
+        pen.goto(0, -100) 
+        pen.write("Press 'M' for medium difficulty", align="center", font=("Arial", 10, "italic"))
+        pen.goto(0, -120) 
+        pen.write("Press 'H' for hard difficulty", align="center", font=("Arial", 10, "italic"))
+        pen.goto(0, -140)
+        pen.write("Press 'I' for game instructions", align="center", font=("Arial", 10, "italic"))
         pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
         update()
         return
@@ -95,8 +179,16 @@ def move():  # Move the snake forward
         pen.goto(0, -30)  
         pen.write("Final Length: " + str(len(snake)), align="center", font=("Arial", 14, "normal")) 
         pen.goto(0, -60) 
-        pen.color("black")  
-        pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
+        pen.color("black") #AM -> when the game ends, allow the player to play again and choose their difficulty. 
+        pen.write("To restart game:", align="center", font=("Arial", 12, "italic"))
+        pen.goto(0, -80) 
+        pen.write("Press 'E' for easy difficulty", align="center", font=("Arial", 10, "italic"))
+        pen.goto(0, -100) 
+        pen.write("Press 'M' for medium difficulty", align="center", font=("Arial", 10, "italic"))
+        pen.goto(0, -120) 
+        pen.write("Press 'H' for hard difficulty", align="center", font=("Arial", 10, "italic"))
+        pen.goto(0, -140)
+        pen.write("Press 'I' for game instructions", align="center", font=("Arial", 10, "italic"))
         return
 
     snake.append(head)  # Add new head position to the snake to make it "move" forward 
@@ -167,7 +259,10 @@ onkey(lambda: change(10, 0), 'Right')  # Right arrow key changes snake direction
 onkey(lambda: change(-10, 0), 'Left')  # Left arrow key changes snake direction to the left
 onkey(lambda: change(0, 10), 'Up')  # Up arrow key changes snake direction up
 onkey(lambda: change(0, -10), 'Down')  # Down arrow key changes snake direction down
-onkey(restart, 'r')  # AH -> Press letter key "r" to restart game
+onkey(restart_easy, 'e')  # AH -> Press letter key to restart game
+onkey(restart_med, 'm')  #AM -> Press the letter key associated with each difficulty
+onkey(restart_hard, 'h')
+onkey(game_instructions, 'i') #AM -> Press the letter key "i" to see game instructions
 
 # To start game:
 move()  # Start the game and the snake's movement
