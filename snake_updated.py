@@ -256,7 +256,8 @@ def window_border():#AB -> outlines the playable area of the game window
         my_pen.forward(400)
         my_pen.right(90)
     my_pen.hideturtle()
-    
+    #Source: (The Python Software Foundation, 2024)
+
 # Game setup
 setup(420, 420, 370, 0)  # Setup game window size
 window_border()    # Creating a border for the playable area
@@ -267,10 +268,11 @@ onkey(lambda: change(10, 0), 'Right')  # Right arrow key changes snake direction
 onkey(lambda: change(-10, 0), 'Left')  # Left arrow key changes snake direction to the left
 onkey(lambda: change(0, 10), 'Up')  # Up arrow key changes snake direction up
 onkey(lambda: change(0, -10), 'Down')  # Down arrow key changes snake direction down
-onkey(restart_easy, 'e')  # AH -> Press letter keys to restart game #Source: (GeeksforGeeks, 2020)
+onkey(restart_easy, 'e')  # AH -> Press letter keys to restart game 
 onkey(restart_med, 'm')  #AM -> Press the letter key associated with each difficulty
 onkey(restart_hard, 'h')
 onkey(game_instructions, 'i') #AM -> Press the letter key "i" to see game instructions
+#Source: (GeeksforGeeks, 2020)
 
 # To start game:
 move()  # Start the game and the snake's movement
