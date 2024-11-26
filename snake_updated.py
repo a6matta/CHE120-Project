@@ -47,12 +47,12 @@ snake = [vector(10, 0)]
 aim = vector(0, -10)
 
 # AH -> Obstacles that the snake must avoid in randomized positions (5 random obstacles)
-obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
+obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)] #Source: (Chaturvedi, 2021), (Stack Overflow user14372, 2014)
 
 # GS -> To write messages on Game screen
-pen = Turtle()
+pen = Turtle() #Source: (The Python Software Foundation, 2024)
 pen.hideturtle()
-pen.up()
+pen.up() 
 
 def change(x, y):  # To change the snake's direction of movement
     aim.x = x
@@ -68,7 +68,7 @@ def inside(position):  # To check if a position is within the game boundaries
 #    snake = [vector(10, 0)]
 #    aim = vector(0, -10)
 #    obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)]
-#    pen.clear()  # Clear the "Game Over" screen
+#    pen.clear()  # Clear the "Game Over" screen 
 #    clear() 
 #    move()  # Recall all necessary functions to start the game 
 #    move_obstacles()
@@ -76,7 +76,7 @@ def inside(position):  # To check if a position is within the game boundaries
 
 #AM -> Restart the game to easy difficulty. THe number of obstacles is reset to 3
 def restart_easy():  # AH -> Restart the game by resetting all variables and re-calling all functions
-    global food, bad_food, snake, aim, obstacles
+    global food, bad_food, snake, aim, obstacles #Global variables to change to global scope as variables need to be used across functions
     food = vector(0, 0)  # Re-initialize all variables
     bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
     snake = [vector(10, 0)]
@@ -117,8 +117,8 @@ def restart_hard():
     move_bad_food()
 
 #AM -> Print out the game instructions.
-def game_instructions():
-    pen.clear()
+def game_instructions(): 
+    pen.clear() 
     clear()
     pen.goto(0, 100) 
     pen.color("black")  
@@ -147,7 +147,7 @@ def game_instructions():
     pen.write("Press 'H' for hard difficulty", align="center", font=("Arial", 10, "italic"))
     pen.goto(0, -130)
     pen.write("Press 'I' for game instructions", align="center", font=("Arial", 10, "italic"))
-
+    #Source: (The Python Software Foundation, 2024)
 
 def move():  # Move the snake forward
     if len(snake) == 0:  # AH -> If the snake is of length 0, end the game
@@ -265,7 +265,7 @@ onkey(lambda: change(10, 0), 'Right')  # Right arrow key changes snake direction
 onkey(lambda: change(-10, 0), 'Left')  # Left arrow key changes snake direction to the left
 onkey(lambda: change(0, 10), 'Up')  # Up arrow key changes snake direction up
 onkey(lambda: change(0, -10), 'Down')  # Down arrow key changes snake direction down
-onkey(restart_easy, 'e')  # AH -> Press letter keys to restart game
+onkey(restart_easy, 'e')  # AH -> Press letter keys to restart game #Source: (GeeksforGeeks, 2020)
 onkey(restart_med, 'm')  #AM -> Press the letter key associated with each difficulty
 onkey(restart_hard, 'h')
 onkey(game_instructions, 'i') #AM -> Press the letter key "i" to see game instructions
