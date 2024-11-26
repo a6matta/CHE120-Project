@@ -49,7 +49,8 @@ snake = [vector(10, 0)]
 aim = vector(0, -10)
 
 # AH -> Obstacles that the snake must avoid in randomized positions (5 random obstacles)
-obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)] #Source: (Chaturvedi, 2021), (Stack Overflow user14372, 2014)
+obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in range(5)] 
+#Source: (Chaturvedi, 2021), (Stack Overflow user14372, 2014)
 
 # GS -> To write messages on Game screen
 pen = Turtle() #Source: (The Python Software Foundation, 2024)
