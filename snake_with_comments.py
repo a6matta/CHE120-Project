@@ -80,6 +80,7 @@ def move(): #AM -> This function is used to assign the head to the snake body an
     #Since the last element of the list is the head, the new position of the snake's head is added to the end, and this
     #represents the snake moving forward (since the list reflects the snake's body from head to tail - the consistent updatng
     #of head position makes the snake appear to be moving forward as required in game play) 
+    #Source: (W3Schools, 2024)
     
     #AH -> # This section is to check if snake "eats" the food and then update the game accordingly 
     if head == food: #AH -> The condition if head == food, is to check if the snake's head position matches the food position (meaning it can "eat" the food)
@@ -93,6 +94,7 @@ def move(): #AM -> This function is used to assign the head to the snake body an
         #randrange(start,stop,step) generates random numbers from a specified range, the range specified will generate a random integer between -15 and 14 (stop is exlcusive) that will 
         #represent possible positions in terms of the game grid (the x10 is potentially to scale the grid positions to actual coordinates for the food to be placed?)
         #The above ensures that the food will appear somwhere else on the screen for the snake to chase and the game play to continue
+        #Source: (Jenks, 2023)
   
     else: #AH -> If head != food, and the above condition evaluates to false indicating that the snake did not "eat" the food, the else condition is valid:
         snake.pop(0) #AH -> .pop removes the element of a list at the specified position 
@@ -100,9 +102,11 @@ def move(): #AM -> This function is used to assign the head to the snake body an
         #AH -> This ensures that the snake's length remains constant (since a new head position is always appended to make the snake "move" forward, if food is not eaten, 
         #the tail must be removed to ensure that the snake doesn't get longer based on the added "heads" (since in the game of snake, the snake only gets longer when food is eaten) 
 #AH -> Therefore the above if statement ensures that the game play follows by growing the snake by one segment everytime food is eaten, and maintaining snake length if not 
+        #Source: (W3Schools, 2024)
   
     #AH -> From import turtle, clear() erases the entire canvas (clears what is displayed on screen but does not reset other properties)
     clear() #AH -> The clear function erases the previous game frame to update to the new one (i.e. the new snake/food positions to ensure seamless transitions between frames) 
+    #Source: (The Python Software Foundation, 2024)
 
     #AH -> #The for loop iterates over each segment in the snake list: 
     for body in snake:
@@ -111,6 +115,7 @@ def move(): #AM -> This function is used to assign the head to the snake body an
     #AH-> The line above is responsible for drawing the snake and updating the game screen
     #AH -> The body represents one segment of the snake and is stored as a vector object which contains (x,y) coordinates
     #-> This section of code draws a 9x9 (size) black (colour) square, where body.x and body.y specify the position on screen
+    #Source: (Jenks, 2023)
 
     #Therefore each body segment of the snake is drawn as a black square and the food appears as a green sqaure for easy differentiation, representing both the snake, its movement, and the food's location 
 #------------------------------------------------------------------------------------
