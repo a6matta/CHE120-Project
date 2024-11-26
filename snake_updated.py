@@ -30,7 +30,7 @@ Further Potential Improvements:
 - Avoid good food/bad food/obstacle overlapping condition 
 - Allow user to adjust time for bad food/obstacle movement 
 
-NOTE: ANy references or aids used in the creation of this code are cited in the slideshow presentation attached with the project submission  
+NOTE: Any references or aids used in the creation of this code are cited in the slideshow presentation attached with the project submission  
 """
 from random import randrange  # Import the randrange function for generating random positions
 from turtle import *  # Import all turtle functions for graphics and animation
