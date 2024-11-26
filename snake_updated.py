@@ -53,9 +53,10 @@ obstacles = [vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10) for _ in r
 #Source: (Chaturvedi, 2021), (Stack Overflow user14372, 2014)
 
 # GS -> To write messages on Game screen
-pen = Turtle() #Source: (The Python Software Foundation, 2024)
+pen = Turtle() 
 pen.hideturtle()
 pen.up() 
+#Source: (The Python Software Foundation, 2024)
 
 def change(x, y):  # To change the snake's direction of movement
     aim.x = x
