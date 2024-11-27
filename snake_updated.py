@@ -121,16 +121,20 @@ def restart_hard():
     move_bad_food()
 
 #AM -> Print out the game instructions.
-def game_instructions(): 
-    pen.clear() 
+def game_instructions():
+    pen.clear()
     clear()
-    pen.goto(0, 100) 
+    pen.goto(0, 140) 
     pen.color("black")  
-    pen.write("Game Instructions:", align="center", font=("Arial", 14, "italic")) #AM -> displays the game instructions and controls.
-    pen.goto(0, 75)  
-    pen.write("Use the arrow keys to move your snake. Grow your snake to gain points. Don't hit the walls or obstacles!", align="center", font=("Arial", 12, "italic"))
+    pen.write("Game Instructions:", align="center", font=("Arial", 14, "italic"))
+    pen.goto(0, 115)  
+    pen.write("Use the arrow keys to move your snake.", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0,100)
+    pen.write("Grow your snake to gain points.", align="center", font=("Arial", 12, "italic"))
+    pen.goto(0,85)
+    pen.write("Don't hit the walls or obstacles!", align="center", font=("Arial", 12, "italic"))
     pen.goto(0, 50) 
-    pen.color("green")  #AM -> display what each coloured block represents
+    pen.color("green")  
     pen.write("green --> your snake", align="center", font=("Arial", 12, "italic"))
     pen.goto(0, 25) 
     pen.color("blue")  
@@ -141,15 +145,15 @@ def game_instructions():
     pen.goto(0, -25) 
     pen.color("black")  
     pen.write("black --> hitting an obstacle makes you lose the game!", align="center", font=("Arial", 12, "italic"))
-    pen.goto(0, -50) #AM -> allows the player to play again and select their difficulty
+    pen.goto(0, -60) 
     pen.write("To play again:", align="center", font=("Arial", 12, "italic")) 
-    pen.goto(0, -70) 
+    pen.goto(0, -80) 
     pen.write("Press 'E' for easy difficulty", align="center", font=("Arial", 10, "italic"))
-    pen.goto(0, -90) 
+    pen.goto(0, -100) 
     pen.write("Press 'M' for medium difficulty", align="center", font=("Arial", 10, "italic"))
-    pen.goto(0, -110) 
+    pen.goto(0, -120) 
     pen.write("Press 'H' for hard difficulty", align="center", font=("Arial", 10, "italic"))
-    pen.goto(0, -130)
+    pen.goto(0, -140)
     pen.write("Press 'I' for game instructions", align="center", font=("Arial", 10, "italic"))
     #Source: (The Python Software Foundation, 2024)
 
