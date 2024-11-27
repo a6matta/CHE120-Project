@@ -36,6 +36,10 @@ from random import randrange  # Import the randrange function for generating ran
 from turtle import *  # Import all turtle functions for graphics and animation
 from freegames import square, vector  # Import square (to draw objects) and vector (for positions)
 
+#Initialize the counters of eaten foods
+good_count = 0
+bad_count = 0
+
 # Initialize the food's position
 food = vector(0, 0)
 
@@ -57,6 +61,16 @@ pen = Turtle()
 pen.hideturtle()
 pen.up() 
 #Source: (The Python Software Foundation, 2024)
+
+#AB -> To draw the game border
+my_pen = Turtle()
+my_pen.hideturtle()
+my_pen.penup()
+
+#AB -> To display the counters of eaten foods on the game screen
+count_pen = Turtle()
+count_pen.hideturtle()
+count_pen.penup()
 
 def change(x, y):  # To change the snake's direction of movement
     aim.x = x
@@ -80,7 +94,7 @@ def inside(position):  # To check if a position is within the game boundaries
 
 #AM -> Restart the game to easy difficulty. THe number of obstacles is reset to 3
 def restart_easy():  # AH -> Restart the game by resetting all variables and re-calling all functions
-    global food, bad_food, snake, aim, obstacles #Global variables to change to global scope as variables need to be used across functions
+    global food, bad_food, snake, aim, obstacles, good_count, bad_count #Global variables to change to global scope as variables need to be used across functions
     food = vector(0, 0)  # Re-initialize all variables
     bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
     snake = [vector(10, 0)]
@@ -91,10 +105,13 @@ def restart_easy():  # AH -> Restart the game by resetting all variables and re-
     move()  # Recall all necessary functions to start the game 
     move_obstacles()
     move_bad_food()
+    good_count = 0 #AB -> resets the counters when the game restarts
+    bad_count = 0
+    eat_count(good_count,bad_count) #AB -> calls the function to display the restet counter 
 
 #AM -> Restart the game to medium difficulty. The number of obstacles is reset to 6.
 def restart_med():  
-    global food, bad_food, snake, aim, obstacles
+    global food, bad_food, snake, aim, obstacles, good_count, bad_count
     food = vector(0, 0)
     bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
     snake = [vector(10, 0)]
@@ -105,10 +122,13 @@ def restart_med():
     move()
     move_obstacles()
     move_bad_food()
+    good_count = 0
+    bad_count = 0
+    eat_count(good_count,bad_count)
 
 #AM -> Restart the game to hard difficulty. The number of obstacles is reset to 9.
 def restart_hard():  
-    global food, bad_food, snake, aim, obstacles
+    global food, bad_food, snake, aim, obstacles, good_count, bad_count
     food = vector(0, 0) 
     bad_food = vector(randrange(-15, 15) * 10, randrange(-15, 15) * 10)
     snake = [vector(10, 0)]
@@ -119,6 +139,9 @@ def restart_hard():
     move()
     move_obstacles()
     move_bad_food()
+    good_count = 0
+    bad_count = 0
+    eat_count(good_count,bad_count)
 
 #AM -> Print out the game instructions.
 def game_instructions():
@@ -176,7 +199,7 @@ def move():  # Move the snake forward
         pen.write("Press 'H' for hard difficulty", align="center", font=("Arial", 10, "italic"))
         pen.goto(0, -140)
         pen.write("Press 'I' for game instructions", align="center", font=("Arial", 10, "italic"))
-        pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
+        #pen.write("Press 'R' to restart the game", align="center", font=("Arial", 12, "italic"))
         update()
         return
 
@@ -211,6 +234,7 @@ def move():  # Move the snake forward
         print('Ate good food! Snake length:', len(snake)) #Print snake length if good food eaten 
         food.x = randrange(-15, 15) * 10  # Once eaten, food position is randomized to new spot on grid 
         food.y = randrange(-15, 15) * 10
+        eat_count(1, 0)#AB --> Update the bad food counter when bad food eaten
 
     elif head == bad_food:  # AH -> If snake eats "bad" food
         bad_food.x = randrange(-15, 15) * 10  # Once eaten, bad food position is randomized to new spot on grid 
@@ -219,6 +243,7 @@ def move():  # Move the snake forward
             snake.remove(snake[-1])  # AM # Reduce the snake's length by one segment
             snake.pop(0) #AH -> To ensure snake shrinks 
             print('Ate bad food! Snake length:', len(snake)) #AH -> Print snake length if bad food eaten 
+            eat_count(0, 1)#AB --> Update the bad food counter when bad food eaten
         else:  # AH -> If the snake is too short (segment can't be removed), the game ends
             square(head.x, head.y, 9, 'red')  # Draw head in red to indicate Game Over
             update()
@@ -253,20 +278,36 @@ def move_bad_food():  # AH -> Randomly move bad food to new positions after cert
     bad_food.y = randrange(-15, 15) * 10
     ontimer(move_bad_food, 5000)  # AH -> Schedule bad food movement every 5 seconds
 
-def window_border():#AB -> outlines the playable area of the game window
-    my_pen = Turtle()
-    my_pen.penup()
+def window_border():#AB -> oulines the playable area of the game
     my_pen.setposition(-200,200)
     my_pen.pendown()
     for top in range(4):
         my_pen.forward(400)
         my_pen.right(90)
-    my_pen.hideturtle()
+    #AB -> writing the food counter titles 
+    my_pen.up()
+    my_pen.goto(-195, 205)
+    my_pen.write('Good: ', font=("Arial", 10, "normal")) #Source: Reddit
+    my_pen.up()
+    my_pen.goto(145,205)
+    my_pen.write('Bad: ',font=("Arial", 10, "normal")) #Source: Reddit
+    #Source: (The Python Software Foundation, 2024)
+
+def eat_count(good, bad):#AB -> keeps track of and then displays the number of eaten food
+    global good_count, bad_count #AB -> defines the required variables in the global scope
+    good_count += good # AB -> increaes the good food counter by 1 everytime a good food is eaten)
+    bad_count += bad # AB -> increaes the bad food counter by 1 everytime a bad food is eaten)
+    count_pen.clear() # AB -> removes the old counts
+    count_pen.goto(-155, 205)
+    count_pen.write(f'{good_count}', font=("Arial", 10, "normal")) #Source: Reddit
+    count_pen.goto(175,205)
+    count_pen.write(f'{bad_count}',font=("Arial", 10, "normal")) #Source: Reddit
     #Source: (The Python Software Foundation, 2024)
 
 # Game setup
-setup(420, 420, 370, 0)  # Setup game window size
-window_border()    # Creating a border for the playable area
+setup(420, 450, 370, 0)  # Setup game window size
+window_border() # Creating a border around the playable area
+eat_count(good_count, bad_count) # displays the initial counters for the foods
 hideturtle()  # Hide turtle cursor 
 tracer(False)  # Disable automatic screen updates 
 listen()  # Enable keyboard inputs 
