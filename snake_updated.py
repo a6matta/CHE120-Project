@@ -271,12 +271,12 @@ def move_obstacles():  # AH -> Randomly move obstacles to new positions after ce
     for obstacle in obstacles:
         obstacle.x = randrange(-15, 15) * 10  # AH -> Assign new random grid position for obstacles
         obstacle.y = randrange(-15, 15) * 10
-    ontimer(move_obstacles, 5000)  # AH -> Schedule obstacle movement every 5 seconds
+    ontimer(move_obstacles, 6000)  # AH -> Schedule obstacle movement every 6 seconds
 
 def move_bad_food():  # AH -> Randomly move bad food to new positions after certain time
     bad_food.x = randrange(-15, 15) * 10  # AH -> Move bad food to new random grid position
     bad_food.y = randrange(-15, 15) * 10
-    ontimer(move_bad_food, 5000)  # AH -> Schedule bad food movement every 5 seconds
+    ontimer(move_bad_food, 6000)  # AH -> Schedule bad food movement every 6 seconds
 
 def window_border():#AB -> oulines the playable area of the game
     my_pen.setposition(-200,200)
