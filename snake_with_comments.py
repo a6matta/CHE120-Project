@@ -1,3 +1,5 @@
+#CHE 120 Project: Alisha Matta, Ashley Burton, Areeba Hasan, Gouri Sureshkumar
+
 #AB: Ashley Burton
 #AM: Alisha Matta
 #AH: Areeba Hasan
