@@ -1,3 +1,5 @@
+#CHE 120 Project: Alisha Matta, Ashley Burton, Areeba Hasan, Gouri Sureshkumar
+
 """Snake, classic arcade game.
 In the original game, the snake is moved across the game screen and needs to eat "food" while avoiding
 hitting itself or the edges of the game screen limits. 
